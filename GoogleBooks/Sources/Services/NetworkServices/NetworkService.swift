@@ -49,4 +49,35 @@ class NetworkService: NetworkSearchServiceProtocol {
             completion(.success(response))
         }
     }
+    
+    func loadingImageData(
+        imageURL: URL?,
+        completion: @escaping (UIImage) -> Void
+    ) {
+        let placeHolderImage = UIImage(systemName: "books.vertical")!
+        guard let imageURL = imageURL
+        else {
+            completion(placeHolderImage)
+            return
+        }
+        AF.request(imageURL, method: .get,
+                   parameters: nil,
+                   encoding: URLEncoding.default)
+        .validate(statusCode: 200..<299)
+        .validate(contentType: ["application/json"])
+        .responseData { (responseData) in
+            guard let responseData = responseData.value
+            else {
+                completion(placeHolderImage)
+                return
+            }
+            guard let image = UIImage(data: responseData)
+            else {
+                completion(placeHolderImage)
+                return
+            }
+            completion(image)
+        }
+    }
+
 }
