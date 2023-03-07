@@ -27,15 +27,16 @@ class SearchView: UIView {
     private lazy var booksSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search"
+        searchBar.searchBarStyle = .minimal
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.backgroundColor = .gray
         searchBar.searchTextField.leftView = self.magnifyingglassStackView
-        searchBar.searchTextField.font = UIFont.markProRegular(ofSize: 12)
-        searchBar.layer.masksToBounds = true
+        searchBar.searchTextField.font = UIFont.markProRegular(ofSize: 16)
         return searchBar
     }()
     
     private lazy var searchTableView = MainTableView(frame: .zero, style: .plain)
+    private lazy var activityIndicatorView = UIActivityIndicatorView.internalActivityIndicatorViewInit()
     
     // MARK: - Lifecycle
     
@@ -53,29 +54,36 @@ class SearchView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.booksSearchBar.searchTextField.layer.cornerRadius = booksSearchBar.bounds.height / 2
-        self.booksSearchBar.layer.cornerRadius = booksSearchBar.bounds.height / 2
     }
     
     // MARK: - Settings
 
     private func setupHierarchy() {
-        addSubviews(booksSearchBar, searchTableView)
+        addSubviews(booksSearchBar, activityIndicatorView, searchTableView)
     }
     
     private func setupLayout() {
         booksSearchBar.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(30)
-            make.left.right.equalToSuperview().inset(30)
-            make.height.equalToSuperview().multipliedBy(1/5)
+            make.top.equalToSuperview().inset(45)
+            make.left.right.equalToSuperview().inset(15)
+            make.height.equalToSuperview().dividedBy(10)
+        }
+        
+        activityIndicatorView.snp.makeConstraints { make in
+            make.bottom.left.right.equalToSuperview()
+            make.top.equalTo(booksSearchBar.snp.bottom).offset(20)
         }
         
         searchTableView.snp.makeConstraints { make in
-            make.bottom.left.right.equalToSuperview().inset(10)
-            make.top.equalTo(booksSearchBar).offset(20)
+            make.top.equalTo(activityIndicatorView.snp.top)
+            make.left.equalTo(activityIndicatorView.snp.left)
+            make.bottom.equalTo(activityIndicatorView.snp.bottom)
+            make.right.equalTo(activityIndicatorView.snp.right)
         }
     }
     
     private func setupView() {
-                
+        activityIndicatorView.color = .gray
+//        searchTableView.isHidden = true
     }
 }
