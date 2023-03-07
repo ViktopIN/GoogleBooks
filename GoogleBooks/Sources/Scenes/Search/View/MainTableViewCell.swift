@@ -41,14 +41,39 @@ class MainTableViewCell: UITableViewCell {
         and: .medium,
         UIColor.customDarkBlue
     )
-
+    
+    private lazy var favoriteMarkButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "noFillHeart"),
+                        for: .normal)
+        button.setImage(UIImage(named: "fillHeart"),
+                        for: .selected)
+        button.backgroundColor = .white
+        button.imageView?.contentMode = .center
+        button.layer.cornerRadius = 25 / 2
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 10
+        button.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0,
+                                                                   y: 0,
+                                                                   width: 25,
+                                                                   height: 25),
+                                               cornerRadius: 25/2).cgPath
+        button.layer.shadowOffset = .zero
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     // MARK: - Init
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
         setupLayout()
         setupView()
+
     }
     
     required init?(coder: NSCoder) {
@@ -58,28 +83,23 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Settings
     
     private func setupHierarchy() {
-        addSubviews(mainImageView, mainLabel)
+        addSubview(mainStackView)
+        mainStackView.addArrangedSubviews(
+            mainImageView,
+            labelsStackView,
+            favoriteMarkButton
+        )
+        labelsStackView.addArrangedSubviews(
+            titleLable,
+            authorLabel
+        )
     }
     
     private func setupLayout() {
-        NSLayoutConstraint.activate([
-            mainImageView.topAnchor.constraint(equalTo: topAnchor),
-            mainImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            mainImageView.heightAnchor.constraint(equalToConstant: Metrics.mainImageViewHeight),
-            mainImageView.widthAnchor.constraint(equalToConstant: Metrics.mainImageViewHeight)
-        ])
-        
-        NSLayoutConstraint.activate([
-            mainLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            mainLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            mainLabel.leftAnchor.constraint(equalTo: leftAnchor),
-            mainLabel.rightAnchor.constraint(equalTo: rightAnchor)
-        ])
+        mainStackView.fillSuperview()
     }
     
     private func setupView() {
-        backgroundColor = .clear
-        mainLabel.textAlignment = .center
     }
 }
 
@@ -89,9 +109,8 @@ extension MainTableViewCell {
         static let mainLabelTextSize: CGFloat = 12
         static let mainImageViewShadowColor: CGColor = UIColor.lightGray.cgColor
         static let mainImageViewShadowOpacity: Float = 0.4
-        static let mainImageViewShadowRadius: CGFloat = 8
+        static let mainImageViewShadowRadius: CGFloat = 10
         static let mainImageViewShadowOffset = CGSize(width: 0,
                                                       height: 0)
-        
     }
 }
