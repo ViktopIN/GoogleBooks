@@ -15,6 +15,8 @@ class MainTableViewCell: UITableViewCell {
         
     //  MARK: - Views
     
+    private lazy var activityIndicatorView = UIActivityIndicatorView.internalActivityIndicatorViewInit()
+    
     private lazy var mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .center
@@ -92,8 +94,9 @@ class MainTableViewCell: UITableViewCell {
     
     private func setupHierarchy() {
         addSubview(mainStackView)
+        activityIndicatorView.addSubview(mainImageView)
         mainStackView.addArrangedSubviews(
-            mainImageView,
+            activityIndicatorView,
             labelsStackView,
             favoriteMarkButton
         )

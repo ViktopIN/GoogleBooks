@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		842DE2BC29B7364B00505564 /* UIActivityIndicatorView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DE2BB29B7364B00505564 /* UIActivityIndicatorView+Extension.swift */; };
+		842DE2BE29B73D7F00505564 /* GoogleResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DE2BD29B73D7F00505564 /* GoogleResponseModel.swift */; };
+		842DE2C229B7419300505564 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DE2C129B7419300505564 /* APIService.swift */; };
+		842DE2C429B74ABE00505564 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DE2C329B74ABE00505564 /* NetworkService.swift */; };
 		84B0E49A29B70B340068EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0E49929B70B340068EC00 /* AppDelegate.swift */; };
 		84B0E4A329B70B340068EC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E4A229B70B340068EC00 /* Assets.xcassets */; };
 		84B0E4A629B70B340068EC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E4A429B70B340068EC00 /* LaunchScreen.storyboard */; };
@@ -28,12 +31,16 @@
 		84B4E3E929B7296B0057C03F /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E3E829B7296B0057C03F /* MainTableView.swift */; };
 		84B4E3EB29B72A000057C03F /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E3EA29B72A000057C03F /* MainTableViewCell.swift */; };
 		84B4E3ED29B72B050057C03F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E3EC29B72B050057C03F /* UILabel+Extension.swift */; };
-		F1B251E5720DEAEA949EAEAE /* Pods_GoogleBooks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E58F6F3E1BB9FDCB66DE60 /* Pods_GoogleBooks.framework */; };
+		84FB096C29B74CD60046EA07 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB096B29B74CD60046EA07 /* NetworkError.swift */; };
+		A5CFE6960227A34619B7A09A /* Pods_GoogleBooks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2577D9CFECC8F96FEEF78C /* Pods_GoogleBooks.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10B98A821F2EFA1D32095A31 /* Pods-GoogleBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleBooks.release.xcconfig"; path = "Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks.release.xcconfig"; sourceTree = "<group>"; };
+		6BC570BD37FC84A846C4223F /* Pods-GoogleBooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleBooks.debug.xcconfig"; path = "Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks.debug.xcconfig"; sourceTree = "<group>"; };
 		842DE2BB29B7364B00505564 /* UIActivityIndicatorView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Extension.swift"; sourceTree = "<group>"; };
+		842DE2BD29B73D7F00505564 /* GoogleResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleResponseModel.swift; sourceTree = "<group>"; };
+		842DE2C129B7419300505564 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		842DE2C329B74ABE00505564 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		84B0E49629B70B340068EC00 /* GoogleBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B0E49929B70B340068EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84B0E4A229B70B340068EC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,8 +63,11 @@
 		84B4E3E829B7296B0057C03F /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		84B4E3EA29B72A000057C03F /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		84B4E3EC29B72B050057C03F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		D5E58F6F3E1BB9FDCB66DE60 /* Pods_GoogleBooks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleBooks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9A3DB42773C594CF293CC54 /* Pods-GoogleBooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleBooks.debug.xcconfig"; path = "Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks.debug.xcconfig"; sourceTree = "<group>"; };
+		84FB096429B74C540046EA07 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84FB096529B74C540046EA07 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84FB096B29B74CD60046EA07 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		91CE70E937C94FA9D58B6FE2 /* Pods-GoogleBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleBooks.release.xcconfig"; path = "Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks.release.xcconfig"; sourceTree = "<group>"; };
+		AD2577D9CFECC8F96FEEF78C /* Pods_GoogleBooks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleBooks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1B251E5720DEAEA949EAEAE /* Pods_GoogleBooks.framework in Frameworks */,
+				A5CFE6960227A34619B7A09A /* Pods_GoogleBooks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,10 +85,28 @@
 		63194CD51EEE41FAA2E2AE12 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D9A3DB42773C594CF293CC54 /* Pods-GoogleBooks.debug.xcconfig */,
-				10B98A821F2EFA1D32095A31 /* Pods-GoogleBooks.release.xcconfig */,
+				6BC570BD37FC84A846C4223F /* Pods-GoogleBooks.debug.xcconfig */,
+				91CE70E937C94FA9D58B6FE2 /* Pods-GoogleBooks.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		842DE2BF29B7416B00505564 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				842DE2C029B7417E00505564 /* NetworkServices */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		842DE2C029B7417E00505564 /* NetworkServices */ = {
+			isa = PBXGroup;
+			children = (
+				842DE2C129B7419300505564 /* APIService.swift */,
+				842DE2C329B74ABE00505564 /* NetworkService.swift */,
+				84FB096B29B74CD60046EA07 /* NetworkError.swift */,
+			);
+			path = NetworkServices;
 			sourceTree = "<group>";
 		};
 		84B0E48D29B70B340068EC00 = {
@@ -147,6 +175,7 @@
 		84CDC36D29B72FBD001CF377 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				842DE2BF29B7416B00505564 /* Services */,
 				84CDC37429B7304A001CF377 /* Setups */,
 				84CDC37329B73010001CF377 /* Common */,
 				84CDC36E29B72FD0001CF377 /* Scenes */,
@@ -176,6 +205,7 @@
 		84CDC37029B72FE5001CF377 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				842DE2BD29B73D7F00505564 /* GoogleResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,7 +249,9 @@
 		8BE0E896D6C9144DDFBAB295 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D5E58F6F3E1BB9FDCB66DE60 /* Pods_GoogleBooks.framework */,
+				84FB096429B74C540046EA07 /* Alamofire.framework */,
+				84FB096529B74C540046EA07 /* SnapKit.framework */,
+				AD2577D9CFECC8F96FEEF78C /* Pods_GoogleBooks.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -231,11 +263,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84B0E4AA29B70B340068EC00 /* Build configuration list for PBXNativeTarget "GoogleBooks" */;
 			buildPhases = (
-				C9D85638B339A2782B786A71 /* [CP] Check Pods Manifest.lock */,
+				9462F7580ED0AFCA0CACF829 /* [CP] Check Pods Manifest.lock */,
 				84B0E49229B70B340068EC00 /* Sources */,
 				84B0E49329B70B340068EC00 /* Frameworks */,
 				84B0E49429B70B340068EC00 /* Resources */,
-				56FD89E09BA640E4ABE70FD2 /* [CP] Embed Pods Frameworks */,
+				F600E0B3493F52DD0DBA405A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -296,24 +328,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		56FD89E09BA640E4ABE70FD2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9D85638B339A2782B786A71 /* [CP] Check Pods Manifest.lock */ = {
+		9462F7580ED0AFCA0CACF829 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -335,6 +350,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F600E0B3493F52DD0DBA405A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -342,8 +374,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842DE2C229B7419300505564 /* APIService.swift in Sources */,
 				84B4E3EB29B72A000057C03F /* MainTableViewCell.swift in Sources */,
+				842DE2BE29B73D7F00505564 /* GoogleResponseModel.swift in Sources */,
 				84B4E3D029B720E70057C03F /* SearchViewController.swift in Sources */,
+				842DE2C429B74ABE00505564 /* NetworkService.swift in Sources */,
 				84B4E3CC29B71A590057C03F /* TabBarItemConfiguration.swift in Sources */,
 				84B0E49A29B70B340068EC00 /* AppDelegate.swift in Sources */,
 				84B4E3E229B726EF0057C03F /* UIColor+Extension.swift in Sources */,
@@ -357,6 +392,7 @@
 				84B4E3E429B727190057C03F /* UIView+Extension.swift in Sources */,
 				84B4E3CA29B71A120057C03F /* MainTabBarController.swift in Sources */,
 				84B4E3E629B727530057C03F /* UIFont+Extension.swift in Sources */,
+				84FB096C29B74CD60046EA07 /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +526,7 @@
 		};
 		84B0E4AB29B70B340068EC00 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9A3DB42773C594CF293CC54 /* Pods-GoogleBooks.debug.xcconfig */;
+			baseConfigurationReference = 6BC570BD37FC84A846C4223F /* Pods-GoogleBooks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -517,7 +553,7 @@
 		};
 		84B0E4AC29B70B340068EC00 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10B98A821F2EFA1D32095A31 /* Pods-GoogleBooks.release.xcconfig */;
+			baseConfigurationReference = 91CE70E937C94FA9D58B6FE2 /* Pods-GoogleBooks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

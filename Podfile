@@ -7,5 +7,6 @@ target 'GoogleBooks' do
 
   # Pods for GoogleBooks
   pod 'SnapKit', '~> 5.6.0'
+  pod 'Alamofire'
 
 end
