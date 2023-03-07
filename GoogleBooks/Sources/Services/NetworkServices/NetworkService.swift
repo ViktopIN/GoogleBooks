@@ -30,9 +30,12 @@ class NetworkService: NetworkSearchServiceProtocol {
         searchExpression: String,
         completion: @escaping (Result<GoogleResponseModel, NetworkError>) -> Void
     ) {
-        AF.request(apiService.getSearchURL(searchExpression: searchExpression), method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default)
+        AF.request(
+            apiService.getSearchURL(searchExpression: searchExpression),
+            method: .get,
+            parameters: nil,
+            encoding: URLEncoding.default
+        )
         .validate(statusCode: 200..<299)
         .validate(contentType: ["application/json"])
         .responseData { (responseData) in

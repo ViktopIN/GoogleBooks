@@ -32,6 +32,7 @@ class APIService: SearchAPIServiceProtocol {
     }
     
     func getURL() -> URL? {
+        print(components.url as Any)
         return components.url
     }
     

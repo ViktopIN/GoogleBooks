@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SearchPresenterProtocol {
+protocol SearchPresenterProtocol: AnyObject{
     var networkService: any NetworkSearchServiceProtocol { get }
     var model: GoogleResponseModel? { get }
     func getFavorite(item: GoogleResponseModel)

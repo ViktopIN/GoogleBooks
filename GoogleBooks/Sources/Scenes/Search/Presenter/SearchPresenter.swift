@@ -9,7 +9,7 @@ import Foundation
 
 class SearchPresenter: SearchPresenterProtocol {
     
-    var view: SearchViewProtocol
+    unowned var view: SearchViewProtocol
     var networkService: NetworkSearchServiceProtocol = NetworkService(apiService: APIService())
     var model: GoogleResponseModel?
     

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SearchViewProtocol {
+protocol SearchViewProtocol: AnyObject {
     func show(next view: SearchView.ShowConfiguration)
 }

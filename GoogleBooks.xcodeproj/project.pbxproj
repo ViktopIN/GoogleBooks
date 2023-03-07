@@ -207,8 +207,8 @@
 		84CDC36D29B72FBD001CF377 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				84CDC37429B7304A001CF377 /* Application */,
 				842DE2BF29B7416B00505564 /* Services */,
-				84CDC37429B7304A001CF377 /* Setups */,
 				84CDC37329B73010001CF377 /* Common */,
 				84CDC36E29B72FD0001CF377 /* Scenes */,
 				84B4E3D129B721050057C03F /* FavoriteViewController.swift */,
@@ -271,12 +271,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		84CDC37429B7304A001CF377 /* Setups */ = {
+		84CDC37429B7304A001CF377 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				84B0E49929B70B340068EC00 /* AppDelegate.swift */,
 			);
-			path = Setups;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		8BE0E896D6C9144DDFBAB295 /* Frameworks */ = {

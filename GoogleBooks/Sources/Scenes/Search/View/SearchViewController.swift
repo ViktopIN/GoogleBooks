@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
         return searchView
     }()
     
-    var presenter: SearchPresenterProtocol?
+    var presenter: SearchPresenterProtocol? = nil
     
     // MARK: - LifeCycle
     
@@ -36,6 +36,7 @@ class SearchViewController: UIViewController {
         searchView.fillSuperview()
         searchView.show(next: .placeholderLabel)
         searchView.searchTableView.dataSource = self
+        searchView.searchBarDelegate(on: self)
     }
 }
 

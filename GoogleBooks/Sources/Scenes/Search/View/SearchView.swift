@@ -30,7 +30,7 @@ class SearchView: UIView {
         return stackView
     }()
 
-    private lazy var booksSearchBar: UISearchBar = {
+    fileprivate lazy var booksSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search"
         searchBar.searchBarStyle = .minimal
@@ -134,5 +134,9 @@ class SearchView: UIView {
             activityIndicatorView.stopAnimating()
             searchTableView.isHidden = false
         }
+    }
+    
+    func searchBarDelegate(on container: UISearchBarDelegate) {
+        booksSearchBar.delegate = container
     }
 }
