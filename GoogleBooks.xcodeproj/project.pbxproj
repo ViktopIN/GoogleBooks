@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842DE2BC29B7364B00505564 /* UIActivityIndicatorView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DE2BB29B7364B00505564 /* UIActivityIndicatorView+Extension.swift */; };
 		84B0E49A29B70B340068EC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0E49929B70B340068EC00 /* AppDelegate.swift */; };
-		84B0E4A129B70B340068EC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E49F29B70B340068EC00 /* Main.storyboard */; };
 		84B0E4A329B70B340068EC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E4A229B70B340068EC00 /* Assets.xcassets */; };
 		84B0E4A629B70B340068EC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E4A429B70B340068EC00 /* LaunchScreen.storyboard */; };
 		84B4E3CA29B71A120057C03F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E3C929B71A120057C03F /* MainTabBarController.swift */; };
@@ -33,9 +33,9 @@
 
 /* Begin PBXFileReference section */
 		10B98A821F2EFA1D32095A31 /* Pods-GoogleBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleBooks.release.xcconfig"; path = "Target Support Files/Pods-GoogleBooks/Pods-GoogleBooks.release.xcconfig"; sourceTree = "<group>"; };
+		842DE2BB29B7364B00505564 /* UIActivityIndicatorView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Extension.swift"; sourceTree = "<group>"; };
 		84B0E49629B70B340068EC00 /* GoogleBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B0E49929B70B340068EC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84B0E4A029B70B340068EC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84B0E4A229B70B340068EC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84B0E4A529B70B340068EC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84B0E4A729B70B340068EC00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,7 +78,6 @@
 				D9A3DB42773C594CF293CC54 /* Pods-GoogleBooks.debug.xcconfig */,
 				10B98A821F2EFA1D32095A31 /* Pods-GoogleBooks.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -105,19 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				84B4E3E729B727760057C03F /* Extensions */,
-				84B0E49929B70B340068EC00 /* AppDelegate.swift */,
-				84B4E3CF29B720E70057C03F /* SearchViewController.swift */,
-				84B4E3D329B725BD0057C03F /* SearchView.swift */,
-				84B4E3E829B7296B0057C03F /* MainTableView.swift */,
-				84B4E3D129B721050057C03F /* FavoriteViewController.swift */,
-				84B4E3C929B71A120057C03F /* MainTabBarController.swift */,
-				84B4E3CD29B71C000057C03F /* MainTabBarItem.swift */,
-				84B4E3CB29B71A590057C03F /* TabBarItemConfiguration.swift */,
-				84B0E49F29B70B340068EC00 /* Main.storyboard */,
-				84B0E4A229B70B340068EC00 /* Assets.xcassets */,
-				84B0E4A429B70B340068EC00 /* LaunchScreen.storyboard */,
-				84B0E4A729B70B340068EC00 /* Info.plist */,
-				84B4E3EA29B72A000057C03F /* MainTableViewCell.swift */,
+				84CDC36C29B72FB6001CF377 /* Resources */,
+				84CDC36D29B72FBD001CF377 /* Sources */,
 			);
 			path = GoogleBooks;
 			sourceTree = "<group>";
@@ -141,8 +129,91 @@
 				84B4E3E129B726EF0057C03F /* UIColor+Extension.swift */,
 				84B4E3DF29B726C80057C03F /* UIStackView+Extension.swift */,
 				84B4E3EC29B72B050057C03F /* UILabel+Extension.swift */,
+				842DE2BB29B7364B00505564 /* UIActivityIndicatorView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84CDC36C29B72FB6001CF377 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84B0E4A229B70B340068EC00 /* Assets.xcassets */,
+				84B0E4A429B70B340068EC00 /* LaunchScreen.storyboard */,
+				84B0E4A729B70B340068EC00 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		84CDC36D29B72FBD001CF377 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				84CDC37429B7304A001CF377 /* Setups */,
+				84CDC37329B73010001CF377 /* Common */,
+				84CDC36E29B72FD0001CF377 /* Scenes */,
+				84B4E3D129B721050057C03F /* FavoriteViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		84CDC36E29B72FD0001CF377 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				84CDC36F29B72FD8001CF377 /* Search */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		84CDC36F29B72FD8001CF377 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				84CDC37229B72FEE001CF377 /* Presenter */,
+				84CDC37129B72FEA001CF377 /* View */,
+				84CDC37029B72FE5001CF377 /* Model */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		84CDC37029B72FE5001CF377 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84CDC37129B72FEA001CF377 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84B4E3EA29B72A000057C03F /* MainTableViewCell.swift */,
+				84B4E3CF29B720E70057C03F /* SearchViewController.swift */,
+				84B4E3E829B7296B0057C03F /* MainTableView.swift */,
+				84B4E3D329B725BD0057C03F /* SearchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84CDC37229B72FEE001CF377 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		84CDC37329B73010001CF377 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				84B4E3CB29B71A590057C03F /* TabBarItemConfiguration.swift */,
+				84B4E3CD29B71C000057C03F /* MainTabBarItem.swift */,
+				84B4E3C929B71A120057C03F /* MainTabBarController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		84CDC37429B7304A001CF377 /* Setups */ = {
+			isa = PBXGroup;
+			children = (
+				84B0E49929B70B340068EC00 /* AppDelegate.swift */,
+			);
+			path = Setups;
 			sourceTree = "<group>";
 		};
 		8BE0E896D6C9144DDFBAB295 /* Frameworks */ = {
@@ -219,7 +290,6 @@
 				84B4E3DD29B726670057C03F /* MarkPro-Medium.ttf in Resources */,
 				84B0E4A329B70B340068EC00 /* Assets.xcassets in Resources */,
 				84B4E3DB29B726670057C03F /* MarkPro-Bold.ttf in Resources */,
-				84B0E4A129B70B340068EC00 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +348,7 @@
 				84B0E49A29B70B340068EC00 /* AppDelegate.swift in Sources */,
 				84B4E3E229B726EF0057C03F /* UIColor+Extension.swift in Sources */,
 				84B4E3D429B725BD0057C03F /* SearchView.swift in Sources */,
+				842DE2BC29B7364B00505564 /* UIActivityIndicatorView+Extension.swift in Sources */,
 				84B4E3CE29B71C000057C03F /* MainTabBarItem.swift in Sources */,
 				84B4E3E929B7296B0057C03F /* MainTableView.swift in Sources */,
 				84B4E3E029B726C80057C03F /* UIStackView+Extension.swift in Sources */,
@@ -292,14 +363,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		84B0E49F29B70B340068EC00 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84B0E4A029B70B340068EC00 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		84B0E4A429B70B340068EC00 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -434,10 +497,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GoogleBooks/Info.plist;
+				INFOPLIST_FILE = GoogleBooks/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,10 +524,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GoogleBooks/Info.plist;
+				INFOPLIST_FILE = GoogleBooks/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
