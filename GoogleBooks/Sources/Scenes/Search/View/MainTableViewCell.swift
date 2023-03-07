@@ -42,6 +42,14 @@ class MainTableViewCell: UITableViewCell {
         UIColor.customDarkBlue
     )
     
+    private lazy var preferenceButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Download", for: .normal)
+        button.setTitleColor(.link, for: .normal)
+        button.setTitleColor(.gray, for: .selected)
+        return button
+    }()
+    
     private lazy var favoriteMarkButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "noFillHeart"),
@@ -91,7 +99,8 @@ class MainTableViewCell: UITableViewCell {
         )
         labelsStackView.addArrangedSubviews(
             titleLable,
-            authorLabel
+            authorLabel,
+            preferenceButton
         )
     }
     
