@@ -82,8 +82,6 @@ class MainTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
         setupLayout()
-        setupView()
-
     }
     
     required init?(coder: NSCoder) {
@@ -111,8 +109,26 @@ class MainTableViewCell: UITableViewCell {
         mainStackView.fillSuperview()
     }
     
-    private func setupView() {
+    // MARK: - Methods
+    
+    func cellLabelsConfiguration(with model: VolumeInfo) {
+        titleLable.text = model.title
+        authorLabel.text = model.authors.joined(separator: ", ")
     }
+    
+    func cellImageConfiguration() -> ((UIImage) -> Void) {
+        return { [weak self] image in
+            self?.mainImageView.image = image
+        }
+    }
+    
+    func cellPreferenceConfiguration(with model: AccessInfo) {
+        let action = UIAction { _ in
+            UIApplication.shared.open(URL(string: model.webReaderLink)!)
+        }
+        preferenceButton.addAction(action, for: .touchUpInside)
+    }
+
 }
 
 extension MainTableViewCell {

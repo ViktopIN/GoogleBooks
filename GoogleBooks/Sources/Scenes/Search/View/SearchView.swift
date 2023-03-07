@@ -9,6 +9,12 @@ import UIKit
 import SnapKit
 
 class SearchView: UIView {
+    
+    enum ShowConfiguration {
+        case activityIndicator
+        case placeholderLabel
+        case tableView
+    }
 
     // MARK: - Views
     
@@ -35,7 +41,14 @@ class SearchView: UIView {
         return searchBar
     }()
     
-    private lazy var searchTableView = MainTableView(frame: .zero, style: .plain)
+    private lazy var placeholderLabel = UILabel(
+        constant: "Enter book name for searching",
+        with: 15,
+        and: .medium,
+        .lightGray
+    )
+    
+    var searchTableView = MainTableView(frame: .zero, style: .plain)
     private lazy var activityIndicatorView = UIActivityIndicatorView.internalActivityIndicatorViewInit()
     
     // MARK: - Lifecycle
@@ -59,7 +72,12 @@ class SearchView: UIView {
     // MARK: - Settings
 
     private func setupHierarchy() {
-        addSubviews(booksSearchBar, activityIndicatorView, searchTableView)
+        addSubviews(
+            booksSearchBar,
+            placeholderLabel,
+            activityIndicatorView,
+            searchTableView
+        )
     }
     
     private func setupLayout() {
@@ -68,7 +86,7 @@ class SearchView: UIView {
             make.left.right.equalToSuperview().inset(15)
             make.height.equalToSuperview().dividedBy(10)
         }
-        
+                
         activityIndicatorView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
             make.top.equalTo(booksSearchBar.snp.bottom).offset(20)
@@ -80,10 +98,41 @@ class SearchView: UIView {
             make.bottom.equalTo(activityIndicatorView.snp.bottom)
             make.right.equalTo(activityIndicatorView.snp.right)
         }
+        
+        placeholderLabel.snp.makeConstraints { make in
+            make.top.equalTo(activityIndicatorView.snp.top)
+            make.left.equalTo(activityIndicatorView.snp.left)
+            make.bottom.equalTo(activityIndicatorView.snp.bottom)
+            make.right.equalTo(activityIndicatorView.snp.right)
+        }
     }
     
     private func setupView() {
         activityIndicatorView.color = .gray
-//        searchTableView.isHidden = true
+        activityIndicatorView.stopAnimating()
+        
+        placeholderLabel.textAlignment = .center
+    }
+    
+    // MARK: - Methods
+        
+    func show(next configuration: ShowConfiguration) {
+        switch configuration {
+        case .placeholderLabel:
+            placeholderLabel.isHidden = false
+            activityIndicatorView.isHidden = true
+            activityIndicatorView.stopAnimating()
+            searchTableView.isHidden = true
+        case .activityIndicator:
+            placeholderLabel.isHidden = true
+            activityIndicatorView.isHidden = false
+            activityIndicatorView.startAnimating()
+            searchTableView.isHidden = true
+        case .tableView:
+            placeholderLabel.isHidden = true
+            activityIndicatorView.isHidden = true
+            activityIndicatorView.stopAnimating()
+            searchTableView.isHidden = false
+        }
     }
 }

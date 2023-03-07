@@ -16,6 +16,8 @@ class SearchViewController: UIViewController {
         return searchView
     }()
     
+    var presenter: SearchPresenterProtocol?
+    
     // MARK: - LifeCycle
     
     override func loadView() {
@@ -24,8 +26,68 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        searchView.fillSuperview()
+        setupView()
     }
     
+    // MARK: - Settings
+    
+    private func setupView() {
+        self.view.backgroundColor = .white
+        searchView.fillSuperview()
+        searchView.show(next: .placeholderLabel)
+        searchView.searchTableView.dataSource = self
+    }
+}
+
+
+// MARK: - Extensions -
+
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter?.model?.items.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MainTableViewCell.reuseID,
+            for: indexPath
+        )
+                as? MainTableViewCell else { return UITableViewCell() }
+        
+        guard let items = presenter?.model?.items else { fatalError() }
+        let item = items[indexPath.row]
+        
+        cell.cellLabelsConfiguration(with: item.volumeInfo)
+        cell.cellPreferenceConfiguration(with: item.accessInfo)
+        presenter?.networkService.loadingImageData(
+            imageURL: URL(string: item.volumeInfo.imageLinks.thumbnail),
+            completion: cell.cellImageConfiguration())
+
+        return cell
+    }
+}
+
+// MARK: - Extensions
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard searchText.isEmpty == false
+        else {
+            searchView.show(next: .placeholderLabel)
+            return
+        }
+        searchView.show(next: .activityIndicator)
+        presenter?.fetchSearchingData(by: searchText)
+    }
+}
+
+extension SearchViewController: SearchViewProtocol {
+    func show(next view: SearchView.ShowConfiguration) {
+        searchView.show(next: view)
+        if view == .tableView {
+            DispatchQueue.main.async { [weak self] in
+                self?.searchView.searchTableView.reloadData()
+            }
+        }
+    }
 }

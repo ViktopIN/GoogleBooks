@@ -7,16 +7,18 @@
 
 import Alamofire
 
-protocol NetworkSearchServiceProtocol {
-    associatedtype ModelType
+protocol NetworkSearchServiceProtocol: AnyObject {
     func fetchSearchData(
         searchExpression: String,
-        completion: @escaping (Result<ModelType, NetworkError>) -> Void
+        completion: @escaping (Result<GoogleResponseModel, NetworkError>) -> Void
+    )
+    func loadingImageData(
+        imageURL: URL?,
+        completion: @escaping (UIImage) -> Void
     )
 }
 
 class NetworkService: NetworkSearchServiceProtocol {
-    typealias ModelType = GoogleResponseModel
     
     let apiService: SearchAPIServiceProtocol
     
@@ -26,7 +28,7 @@ class NetworkService: NetworkSearchServiceProtocol {
     
     func fetchSearchData(
         searchExpression: String,
-        completion: @escaping (Result<ModelType, NetworkError>) -> Void
+        completion: @escaping (Result<GoogleResponseModel, NetworkError>) -> Void
     ) {
         AF.request(apiService.getSearchURL(searchExpression: searchExpression), method: .get,
                    parameters: nil,
@@ -41,7 +43,7 @@ class NetworkService: NetworkSearchServiceProtocol {
                 completion(.failure(.badURL))
             }
         }
-        .responseDecodable(of: ModelType.self) { (response) in
+        .responseDecodable(of: GoogleResponseModel.self) { (response) in
             guard let response = response.value
             else {
                 return completion(.failure(.badJSON)) }
