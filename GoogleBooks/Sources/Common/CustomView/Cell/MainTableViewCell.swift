@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainTableViewCell: UITableViewCell {
     
@@ -19,8 +20,7 @@ class MainTableViewCell: UITableViewCell {
     
     private lazy var mainImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .center
-        imageView.layer.contentsScale = 6
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.shadowColor = Metrics.mainImageViewShadowColor
         imageView.layer.shadowOpacity = Metrics.mainImageViewShadowOpacity
         imageView.layer.shadowRadius = Metrics.mainImageViewShadowRadius
@@ -29,10 +29,7 @@ class MainTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    private lazy var mainStackView = UIStackView(with: .horizontal)
-    private lazy var labelsStackView = UIStackView(with: .vertical)
-    
+        
     private lazy var titleLable = UILabel(
         with: Metrics.mainLabelTextSize,
         and: .medium,
@@ -47,29 +44,28 @@ class MainTableViewCell: UITableViewCell {
     private lazy var preferenceButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Download", for: .normal)
-        button.setTitleColor(.link, for: .normal)
+        button.setTitleColor(.customOrange, for: .normal)
         button.setTitleColor(.gray, for: .selected)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var favoriteMarkButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "noFillHeart"),
-                        for: .normal)
-        button.setImage(UIImage(named: "fillHeart"),
-                        for: .selected)
-        button.backgroundColor = .white
+        button.setImage(
+            UIImage(systemName: "heart")?.withTintColor(.black, renderingMode: .alwaysOriginal),
+            for: .normal
+        )
+        button.setImage(UIImage(
+            systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal),
+            for: .selected
+        )
+        button.backgroundColor = .customOrange
         button.imageView?.contentMode = .center
-        button.layer.cornerRadius = 25 / 2
         button.layer.masksToBounds = false
         button.layer.shadowColor = UIColor.lightGray.cgColor
         button.layer.shadowOpacity = 0.5
         button.layer.shadowRadius = 10
-        button.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0,
-                                                                   y: 0,
-                                                                   width: 25,
-                                                                   height: 25),
-                                               cornerRadius: 25/2).cgPath
         button.layer.shadowOffset = .zero
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,42 +78,95 @@ class MainTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
         setupLayout()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        DispatchQueue.main.async { [unowned self] in
+            favoriteMarkButton.layer.cornerRadius = favoriteMarkButton.bounds.height / 2
+        }
+    }
+    
     // MARK: - Settings
     
     private func setupHierarchy() {
-        addSubview(mainStackView)
-        activityIndicatorView.addSubview(mainImageView)
-        mainStackView.addArrangedSubviews(
+        contentView.addSubviews(
+            mainImageView,
             activityIndicatorView,
-            labelsStackView,
-            favoriteMarkButton
-        )
-        labelsStackView.addArrangedSubviews(
             titleLable,
             authorLabel,
-            preferenceButton
+            preferenceButton,
+            favoriteMarkButton
         )
     }
     
     private func setupLayout() {
-        mainStackView.fillSuperview()
+        activityIndicatorView.snp.makeConstraints { make in
+            make.left.top.bottom.equalToSuperview().inset(10)
+            make.width.equalToSuperview().dividedBy(4)
+        }
+        mainImageView.snp.makeConstraints { make in
+            make.size.equalTo(activityIndicatorView.snp.size)
+            make.top.equalTo(activityIndicatorView.snp.top)
+            make.left.equalTo(activityIndicatorView.snp.left)
+        }
+        
+        titleLable.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.left.equalTo(activityIndicatorView.snp.right).offset(15)
+            make.height.equalToSuperview().dividedBy(4)
+            make.right.equalToSuperview().inset(30)
+        }
+        
+        authorLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleLable.snp.left)
+            make.top.equalTo(titleLable.snp.bottom).offset(5)
+            make.right.equalToSuperview().inset(30)
+            make.height.equalTo(titleLable.snp.height)
+        }
+        
+        preferenceButton.snp.makeConstraints { make in
+            make.left.equalTo(authorLabel.snp.left)
+            make.bottom.equalToSuperview().inset(10)
+            make.right.equalTo(favoriteMarkButton.snp.left).offset(40)
+            make.height.equalToSuperview().dividedBy(5)
+        }
+        
+        favoriteMarkButton.snp.makeConstraints { make in
+            make.centerY.equalTo(preferenceButton.snp.centerY)
+            make.height.equalToSuperview().dividedBy(5)
+            make.width.equalTo(favoriteMarkButton.snp.height)
+            make.centerX.equalToSuperview().offset(80)
+        }
+    }
+    
+    private func setupView() {
+        backgroundColor = .clear
+        
+        activityIndicatorView.color = .black
+        mainImageView.isHidden = true
+        
+        titleLable.numberOfLines = 0
+        authorLabel.numberOfLines = 0
     }
     
     // MARK: - Methods
     
     func cellLabelsConfiguration(with model: VolumeInfo) {
-        titleLable.text = model.title
-        authorLabel.text = model.authors.joined(separator: ", ")
+        titleLable.text = "Title:\n\(model.title)"
+        authorLabel.text = "Author:\n\(model.authors?.first ?? "-")"
     }
     
     func cellImageConfiguration() -> ((UIImage) -> Void) {
         return { [weak self] image in
+            self?.activityIndicatorView.isHidden = true
+            self?.mainImageView.isHidden = false
+            self?.activityIndicatorView.stopAnimating()
             self?.mainImageView.image = image
         }
     }

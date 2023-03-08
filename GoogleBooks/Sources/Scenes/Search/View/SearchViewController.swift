@@ -63,6 +63,7 @@ extension SearchViewController: UITableViewDataSource {
         presenter?.networkService.loadingImageData(
             imageURL: URL(string: item.volumeInfo.imageLinks.thumbnail),
             completion: cell.cellImageConfiguration())
+        cell.selectionStyle = .none
 
         return cell
     }
@@ -86,8 +87,13 @@ extension SearchViewController: SearchViewProtocol {
     func show(next view: SearchView.ShowConfiguration) {
         searchView.show(next: view)
         if view == .tableView {
-            DispatchQueue.main.async { [weak self] in
-                self?.searchView.searchTableView.reloadData()
+            let group = DispatchGroup()
+            group.enter()
+            searchView.searchTableView.reloadData {
+                group.leave()
+            }
+            group.notify(queue: .main) { [unowned self] in
+                searchView.searchTableView.scroll(to: .top, animated: true)
             }
         }
     }

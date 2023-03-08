@@ -59,25 +59,24 @@ class NetworkService: NetworkSearchServiceProtocol {
         imageURL: URL?,
         completion: @escaping (UIImage) -> Void
     ) {
-        let placeHolderImage = UIImage(systemName: "books.vertical")!
+        let placeHolderImage = UIImage(systemName: "books.vertical")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         guard let imageURL = imageURL
         else {
             completion(placeHolderImage)
             return
         }
-        AF.request(imageURL, method: .get,
+        AF.request(imageURL,
+                   method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default)
         .validate(statusCode: 200..<299)
         .validate(contentType: ["application/json"])
         .responseData { (responseData) in
-            guard let responseData = responseData.value
-            else {
+            guard let responseData = responseData.data else {
                 completion(placeHolderImage)
                 return
             }
-            guard let image = UIImage(data: responseData)
-            else {
+            guard let image = UIImage(data: responseData) else {
                 completion(placeHolderImage)
                 return
             }

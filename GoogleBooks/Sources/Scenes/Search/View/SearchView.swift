@@ -67,6 +67,7 @@ class SearchView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.booksSearchBar.searchTextField.layer.cornerRadius = booksSearchBar.bounds.height / 2
+        searchTableView.rowHeight = searchTableView.bounds.height / 4
     }
     
     // MARK: - Settings
@@ -84,12 +85,12 @@ class SearchView: UIView {
         booksSearchBar.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(45)
             make.left.right.equalToSuperview().inset(15)
-            make.height.equalToSuperview().dividedBy(10)
+            make.height.equalToSuperview().dividedBy(11.5)
         }
                 
         activityIndicatorView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(booksSearchBar.snp.bottom).offset(20)
+            make.top.equalTo(booksSearchBar.snp.bottom)
         }
         
         searchTableView.snp.makeConstraints { make in
@@ -112,6 +113,8 @@ class SearchView: UIView {
         activityIndicatorView.stopAnimating()
         
         placeholderLabel.textAlignment = .center
+        
+        searchTableView.backgroundColor = .clear
     }
     
     // MARK: - Methods

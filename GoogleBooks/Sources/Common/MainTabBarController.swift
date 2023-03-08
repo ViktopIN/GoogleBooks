@@ -18,6 +18,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     init(inputTabBarItems: [TabBarItemConfiguration]) {
         self.tabBarItems = inputTabBarItems
         super.init(nibName: nil, bundle: nil)
+        configureTabBar()
     }
     
     required init?(coder: NSCoder) {

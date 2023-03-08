@@ -27,7 +27,7 @@ class SearchPresenter: SearchPresenterProtocol {
             case .success(let success):
                 self.model = success
                 self.view.show(next: .tableView)
-            case .failure(let failure):
+            case .failure(_):
                 self.view.show(next: .placeholderLabel)
                 break
             }

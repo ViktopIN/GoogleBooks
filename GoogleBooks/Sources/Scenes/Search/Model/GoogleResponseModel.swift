@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - GoogleResponseModel
 struct GoogleResponseModel: Codable {
-    let items: [Item] //
+    let items: [Item]
 }
 
 // MARK: - Item
@@ -27,7 +27,7 @@ struct AccessInfo: Codable {
 // MARK: - VolumeInfo
 struct VolumeInfo: Codable {
     let title: String
-    let authors: [String]
+    let authors: [String]?
     let imageLinks: ImageLinks
 }
 

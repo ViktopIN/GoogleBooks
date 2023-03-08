@@ -12,7 +12,7 @@ extension UIActivityIndicatorView {
     static func internalActivityIndicatorViewInit() -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.startAnimating()
-        activityIndicator.hidesWhenStopped = true
+        activityIndicator.hidesWhenStopped = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
 
