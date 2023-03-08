@@ -13,6 +13,8 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     static let reuseID = "MainTableViewCell"
+    private var item: PreparedForCellItem? = nil
+    weak var delegate: CellDeletionEnviromentProtocol?
         
     //  MARK: - Views
     
@@ -68,6 +70,12 @@ class MainTableViewCell: UITableViewCell {
         button.layer.shadowRadius = 10
         button.layer.shadowOffset = .zero
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(
+            self,
+            action: #selector(favoriteMarkAction),
+            for: .touchUpInside
+        )
         
         return button
     }()
@@ -167,7 +175,10 @@ class MainTableViewCell: UITableViewCell {
             self?.activityIndicatorView.isHidden = true
             self?.mainImageView.isHidden = false
             self?.activityIndicatorView.stopAnimating()
-            self?.mainImageView.image = image
+            DispatchQueue.main.async { [weak self] in
+                self?.mainImageView.image = image
+            }
+            self?.item?.image = image
         }
     }
     
@@ -177,7 +188,50 @@ class MainTableViewCell: UITableViewCell {
         }
         preferenceButton.addAction(action, for: .touchUpInside)
     }
-
+    
+    func recieveItem(item: Any) {
+        if let item = item as? Item {
+            self.item = PreparedForCellItem(
+                id: item.id,
+                title: item.volumeInfo.title,
+                authors: item.volumeInfo.authors?.joined(separator: ", "),
+                preferences: item.accessInfo.webReaderLink,
+                image: nil
+            )
+            cellLabelsConfiguration(with: item.volumeInfo)
+            cellPreferenceConfiguration(with: item.accessInfo)
+            DatabaseService.shared.fetchData().forEach { [unowned self] cellItem in
+                DispatchQueue.main.async { [weak self] in
+                    self?.favoriteMarkButton.isSelected = cellItem.id == item.id ? true : false
+                }
+            }
+        } else if let item = item as? PreparedForCellItem {
+            self.item = item
+            cellLabelsConfiguration(with: VolumeInfo(
+                title: item.title,
+                authors: [item.authors ?? ""],
+                imageLinks: nil
+            ))
+            cellPreferenceConfiguration(with: AccessInfo(webReaderLink: item.preferences))
+            activityIndicatorView.isHidden = true
+            mainImageView.isHidden = false
+            activityIndicatorView.stopAnimating()
+            mainImageView.image = item.image ?? UIImage(systemName: "books.vertical")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+            favoriteMarkButton.isSelected = true
+        }
+    }
+    
+    @objc
+    private func favoriteMarkAction() {
+        favoriteMarkButton.isSelected = favoriteMarkButton.isSelected == false ? true : false
+        if favoriteMarkButton.isSelected {
+            guard let item = self.item else { return }
+            DatabaseService.shared.getNewObject(item: item)
+        } else {
+            DatabaseService.shared.deleteData(with: item!.id)
+            delegate?.cellReload()
+        }
+    }
 }
 
 extension MainTableViewCell {
@@ -187,7 +241,6 @@ extension MainTableViewCell {
         static let mainImageViewShadowColor: CGColor = UIColor.lightGray.cgColor
         static let mainImageViewShadowOpacity: Float = 0.4
         static let mainImageViewShadowRadius: CGFloat = 10
-        static let mainImageViewShadowOffset = CGSize(width: 0,
-                                                      height: 0)
+        static let mainImageViewShadowOffset = CGSize(width: 0, height: 0)
     }
 }

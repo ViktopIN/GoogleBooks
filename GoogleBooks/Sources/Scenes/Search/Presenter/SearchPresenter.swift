@@ -12,11 +12,7 @@ class SearchPresenter: SearchPresenterProtocol {
     unowned var view: SearchViewProtocol
     var networkService: NetworkSearchServiceProtocol = NetworkService(apiService: APIService())
     var model: GoogleResponseModel?
-    
-    func getFavorite(item: GoogleResponseModel) {
-        print("get favorite")
-    }
-    
+        
     init(view: SearchViewProtocol) {
         self.view = view
     }

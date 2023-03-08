@@ -29,6 +29,13 @@ class SearchViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async { [unowned self] in
+            searchView.searchTableView.reloadData()
+        }
+    }
+    
     // MARK: - Settings
     
     private func setupView() {
@@ -58,13 +65,12 @@ extension SearchViewController: UITableViewDataSource {
         guard let items = presenter?.model?.items else { fatalError() }
         let item = items[indexPath.row]
         
-        cell.cellLabelsConfiguration(with: item.volumeInfo)
-        cell.cellPreferenceConfiguration(with: item.accessInfo)
+        cell.recieveItem(item: item)
         presenter?.networkService.loadingImageData(
-            imageURL: URL(string: item.volumeInfo.imageLinks.thumbnail),
+            imageURL: URL(string: item.volumeInfo.imageLinks?.thumbnail ?? ""),
             completion: cell.cellImageConfiguration())
         cell.selectionStyle = .none
-
+        
         return cell
     }
 }
