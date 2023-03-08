@@ -7,6 +7,11 @@
 
 import Foundation
 
-protocol FavoritePresenterProtocol {
-    func show(configu)
+protocol FavoritePresenterProtocol: AnyObject {
+    
+    func favoriteItemsObservers()
+}
+
+protocol FavoriteViewProtocol: AnyObject {
+    func show(next view: FavoriteView.ShowConfiguration)
 }

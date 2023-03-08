@@ -14,6 +14,7 @@ struct GoogleResponseModel: Codable {
 
 // MARK: - Item
 struct Item: Codable {
+    let id: String
     let selfLink: String
     let volumeInfo: VolumeInfo
     let accessInfo: AccessInfo
@@ -28,10 +29,10 @@ struct AccessInfo: Codable {
 struct VolumeInfo: Codable {
     let title: String
     let authors: [String]?
-    let imageLinks: ImageLinks
+    let imageLinks: ImageLinks?
 }
 
 // MARK: - ImageLinks
 struct ImageLinks: Codable {
-    let thumbnail: String
+    let thumbnail: String?
 }

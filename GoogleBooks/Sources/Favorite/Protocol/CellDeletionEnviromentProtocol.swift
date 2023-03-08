@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol CellDeletionEnviromentProtocol: AnyObject {
+    func cellReload()
+}

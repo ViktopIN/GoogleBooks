@@ -10,6 +10,5 @@ import Foundation
 protocol SearchPresenterProtocol: AnyObject{
     var networkService: any NetworkSearchServiceProtocol { get }
     var model: GoogleResponseModel? { get }
-    func getFavorite(item: GoogleResponseModel)
     func fetchSearchingData(by bookName: String)
 }
