@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let searchViewController = SearchViewController()
+        let searchPresenter = SearchPresenter(view: searchViewController)
+        searchViewController.presenter = searchPresenter
         let favoriteViewController = FavoriteViewController()
         
         let searchTabBarItemConfiguration = BaseTabBarItem(

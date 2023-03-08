@@ -7,16 +7,18 @@
 
 import Alamofire
 
-protocol NetworkSearchServiceProtocol {
-    associatedtype ModelType
+protocol NetworkSearchServiceProtocol: AnyObject {
     func fetchSearchData(
         searchExpression: String,
-        completion: @escaping (Result<ModelType, NetworkError>) -> Void
+        completion: @escaping (Result<GoogleResponseModel, NetworkError>) -> Void
+    )
+    func loadingImageData(
+        imageURL: URL?,
+        completion: @escaping (UIImage) -> Void
     )
 }
 
 class NetworkService: NetworkSearchServiceProtocol {
-    typealias ModelType = GoogleResponseModel
     
     let apiService: SearchAPIServiceProtocol
     
@@ -26,11 +28,14 @@ class NetworkService: NetworkSearchServiceProtocol {
     
     func fetchSearchData(
         searchExpression: String,
-        completion: @escaping (Result<ModelType, NetworkError>) -> Void
+        completion: @escaping (Result<GoogleResponseModel, NetworkError>) -> Void
     ) {
-        AF.request(apiService.getSearchURL(searchExpression: searchExpression), method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default)
+        AF.request(
+            apiService.getSearchURL(searchExpression: searchExpression),
+            method: .get,
+            parameters: nil,
+            encoding: URLEncoding.default
+        )
         .validate(statusCode: 200..<299)
         .validate(contentType: ["application/json"])
         .responseData { (responseData) in
@@ -41,7 +46,7 @@ class NetworkService: NetworkSearchServiceProtocol {
                 completion(.failure(.badURL))
             }
         }
-        .responseDecodable(of: ModelType.self) { (response) in
+        .responseDecodable(of: GoogleResponseModel.self) { (response) in
             guard let response = response.value
             else {
                 return completion(.failure(.badJSON)) }
@@ -54,25 +59,24 @@ class NetworkService: NetworkSearchServiceProtocol {
         imageURL: URL?,
         completion: @escaping (UIImage) -> Void
     ) {
-        let placeHolderImage = UIImage(systemName: "books.vertical")!
+        let placeHolderImage = UIImage(systemName: "books.vertical")!.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         guard let imageURL = imageURL
         else {
             completion(placeHolderImage)
             return
         }
-        AF.request(imageURL, method: .get,
+        AF.request(imageURL,
+                   method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default)
         .validate(statusCode: 200..<299)
         .validate(contentType: ["application/json"])
         .responseData { (responseData) in
-            guard let responseData = responseData.value
-            else {
+            guard let responseData = responseData.data else {
                 completion(placeHolderImage)
                 return
             }
-            guard let image = UIImage(data: responseData)
-            else {
+            guard let image = UIImage(data: responseData) else {
                 completion(placeHolderImage)
                 return
             }
